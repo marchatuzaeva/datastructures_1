@@ -32,6 +32,14 @@ public class MySinglyLinkedList<E> {
     }
   }
 
+  public E first() {
+    if (isEmpty()) {
+        return null;
+    }
+    return head.data;
+}
+
+
   public void addFirst(E element) {
     if (element == null) {
       throw new IllegalArgumentException("Element cannot be null");

@@ -4,25 +4,24 @@ public class App {
     public static void main(String[] args) {
         MySinglyLinkedList<String> list = new MySinglyLinkedList<>();
 
-        System.out.println("Ist die Liste leer? " + list.isEmpty()); // true
-        System.out.println("Größe der Liste: " + list.size());       // 0
+        System.out.println("Ist die Liste leer? " + list.isEmpty()); 
+        System.out.println("Größe der Liste: " + list.size()); 
 
         list.addFirst("Erstes Element");
         list.addFirst("Zweites Element");
         list.addFirst("Drittes Element");
+        list.addFirst("Viertes Element");
 
-        System.out.println("Ist die Liste leer? " + list.isEmpty()); // false
-        System.out.println("Größe der Liste: " + list.size());       // 3
+        System.out.println("Ist die Liste leer? " + list.isEmpty()); 
+        System.out.println("Größe der Liste: " + list.size()); 
 
-        String entfernt = list.removeFirst();
-        System.out.println("Entferntes Element: " + entfernt);       // Drittes Element
-        System.out.println("Größe nach Entfernen: " + list.size());  // 2
+        System.out.println("Entferntes Element: " + list.removeFirst()); 
+        System.out.println("Größe nach Entfernen: " + list.size()); 
 
-        entfernt = list.removeFirst();
-        System.out.println("Entferntes Element: " + entfernt);       // Zweites Element
-        entfernt = list.removeFirst();
-        System.out.println("Entferntes Element: " + entfernt);       // Erstes Element
-        entfernt = list.removeFirst();
-        System.out.println("Entferntes Element: " + entfernt);       // null
+        System.out.println("Entferntes Element: " + list.removeFirst()); 
+        System.out.println("Entferntes Element: " + list.removeFirst()); 
+        System.out.println("Entferntes Element: " + list.removeFirst()); 
+        System.out.println("Erstes Element: " + list.first()); 
+
     }
 }
