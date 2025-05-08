@@ -1,6 +1,10 @@
 package at.fhj.msd;
 
 public class MyLinkedList<E> {
+    private Node<E> head;
+    private Node<E> tail;
+    private int size = 0;
+
     private static class Node<E> {
         E data;
         Node<E> next;
@@ -13,15 +17,14 @@ public class MyLinkedList<E> {
         }
     }
 
-    private Node<E> head;
-    private Node<E> tail;
-    private int size = 0;
+   
 
     public int size() {
         return size;
     }
 
     public boolean isEmpty() {
+
         return size == 0;
     }
 

@@ -1,60 +1,32 @@
 package at.fhj.msd;
 
 public class MyCalculator {
-    private MySinglyLinkedList<Double> stack = new MySinglyLinkedList<>();
 
-    public double evaluate(String expr) {
-        if (expr == null || expr.trim().isEmpty()) {
-            throw new IllegalArgumentException("Input expression is null or empty");
-        }
+    public static double evaluate(String expr) {
+        String[] tokens = expr.trim().split(" ");
+        MySinglyLinkedList<String> stack = new MySinglyLinkedList<>();
 
-        String[] tokens = expr.trim().split("\\s+");
+        // Von rechts nach links durchgehen
+        for (int i = tokens.length - 1; i >= 0; i--) {
+            String token = tokens[i];
 
-        for (String token : tokens) {
-            switch (token) {
-                case "+":
-                    checkStackSize();
-                    stack.addFirst(stack.removeFirst() + stack.removeFirst());
-                    break;
-                case "-":
-                    checkStackSize();
-                    double bSub = stack.removeFirst();
-                    double aSub = stack.removeFirst();
-                    stack.addFirst(aSub - bSub);
-                    break;
-                case "*":
-                    checkStackSize();
-                    stack.addFirst(stack.removeFirst() * stack.removeFirst());
-                    break;
-                case "/":
-                    checkStackSize();
-                    double bDiv = stack.removeFirst();
-                    double aDiv = stack.removeFirst();
-                    if (bDiv == 0.0) {
-                        throw new ArithmeticException("Division by zero");
-                    }
-                    stack.addFirst(aDiv / bDiv);
-                    break;
-                default:
-                    try {
-                        double num = Double.parseDouble(token);
-                        stack.addFirst(num);
-                    } catch (NumberFormatException e) {
-                        throw new IllegalArgumentException("Invalid token: " + token);
-                    }
+            if (token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/")) {
+                double a = Double.parseDouble(stack.removeFirst());
+                double b = Double.parseDouble(stack.removeFirst());
+
+                double result = 0;
+                if (token.equals("+")) result = a + b;
+                if (token.equals("-")) result = a - b;
+                if (token.equals("*")) result = a * b;
+                if (token.equals("/")) result = a / b;
+
+                stack.addFirst(String.valueOf(result));
+            } else {
+                // Zahl -> auf den Stack legen
+                stack.addFirst(token);
             }
         }
 
-        if (stack.size() != 1) {
-            throw new IllegalStateException("Malformed expression");
-        }
-
-        return stack.removeFirst();
-    }
-
-    private void checkStackSize() {
-        if (stack.size() < 2) {
-            throw new IllegalStateException("Not enough operands for operation");
-        }
+        return Double.parseDouble(stack.removeFirst());
     }
 }
