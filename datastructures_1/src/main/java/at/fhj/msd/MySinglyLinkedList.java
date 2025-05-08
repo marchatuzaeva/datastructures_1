@@ -51,6 +51,7 @@ public class MySinglyLinkedList<E> {
   public E removeFirst() {
     if (isEmpty())
       return null;
+
     E temp = head.data;
     head = head.next;
     size--;
