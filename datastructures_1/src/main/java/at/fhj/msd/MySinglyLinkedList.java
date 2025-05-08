@@ -1,6 +1,7 @@
 package at.fhj.msd;
 
 public class MySinglyLinkedList<E> {
+
   private static class Node<E> {
     E data;
     Node<E> next;
@@ -34,11 +35,10 @@ public class MySinglyLinkedList<E> {
 
   public E first() {
     if (isEmpty()) {
-        return null;
+      return null;
     }
     return head.data;
-}
-
+  }
 
   public void addFirst(E element) {
     if (element == null) {
@@ -53,6 +53,7 @@ public class MySinglyLinkedList<E> {
   public E removeFirst() {
     if (isEmpty())
       return null;
+
     E temp = head.data;
     head = head.next;
     size--;
