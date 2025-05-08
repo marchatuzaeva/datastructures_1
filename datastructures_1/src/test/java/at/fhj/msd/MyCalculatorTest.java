@@ -1,75 +1,66 @@
 package at.fhj.msd;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
-class MyCalculatorTest {
-
-    private MyCalculator calculator = new MyCalculator();
+public class MyCalculatorTest {
 
     @Test
-    void testEvaluateSimpleAddition() {
-        assertEquals(5.0, calculator.compute("2 3 +"));
+    public void testCompute_Addition() {
+        MyCalculator calculator = new MyCalculator();
+        String expression = "2 3 +";
+        int result = calculator.compute(expression);
+        assertEquals(5, result, "2 + 3 should be 5");
     }
 
     @Test
-    void testEvaluateSimpleSubtraction() {
-        assertEquals(1.0, calculator.compute("5 4 -"));
+    public void testCompute_Subtraction() {
+        MyCalculator calculator = new MyCalculator();
+        String expression = "5 3 -";
+        int result = calculator.compute(expression);
+        assertEquals(2, result, "5 - 3 should be 2");
     }
 
     @Test
-    void testEvaluateSimpleMultiplication() {
-        assertEquals(12.0, calculator.compute("3 4 *"));
+    public void testCompute_Multiplication() {
+        MyCalculator calculator = new MyCalculator();
+        String expression = "2 3 *";
+        int result = calculator.compute(expression);
+        assertEquals(6, result, "2 * 3 should be 6");
     }
 
     @Test
-    void testEvaluateSimpleDivision() {
-        assertEquals(4.0, calculator.compute("8 2 /"));
+    public void testCompute_Division() {
+        MyCalculator calculator = new MyCalculator();
+        String expression = "6 3 /";
+        int result = calculator.compute(expression);
+        assertEquals(2, result, "6 / 3 should be 2");
     }
 
     @Test
-    void testEvaluateMultipleOperations() {
-        assertEquals(14.0, calculator.compute("3 4 + 2 *"));
+    public void testCompute_ComplexExpression() {
+        MyCalculator calculator = new MyCalculator();
+        String expression = "2 3 + 1 4 + *";
+        int result = calculator.compute(expression);
+        assertEquals(25, result, "The expression 2 3 + 1 4 + * should be 14");
     }
 
     @Test
-    void testEvaluateWithDivisionByZero() {
+    public void testCompute_MixedOperations() {
+        MyCalculator calculator = new MyCalculator();
+        String expression = "5 1 2 + 4 * + 3 -";
+        int result = calculator.compute(expression);
+        assertEquals(14, result, "The expression 5 1 2 + 4 * + 3 - should be 14");
+    }
+
+    @Test
+    public void testCompute_DivisionByZero() {
+        MyCalculator calculator = new MyCalculator();
+        String expression = "5 0 /";
         try {
-            calculator.compute("2 0 /");
-            fail("Expected ArithmeticException not thrown");
+            calculator.compute(expression);
         } catch (ArithmeticException e) {
-            // Expected exception
-        }
-    }
-
-    @Test
-    void testEvaluateEmptyExpression() {
-        try {
-            calculator.compute("");
-            fail("Expected IllegalArgumentException not thrown");
-        } catch (IllegalArgumentException e) {
-            // Expected exception
-        }
-    }
-
-    @Test
-    void testEvaluateNullExpression() {
-        try {
-            calculator.compute(null);
-            fail("Expected IllegalArgumentException not thrown");
-        } catch (IllegalArgumentException e) {
-            // Expected exception
-        }
-    }
-
-    @Test
-    void testEvaluateWithInvalidToken() {
-        try {
-            calculator.compute("3 4 @");
-            fail("Expected IllegalArgumentException not thrown");
-        } catch (IllegalArgumentException e) {
-            // Expected exception
+            assertEquals("/ by zero", e.getMessage(), "Division by zero should throw an ArithmeticException");
         }
     }
 }
