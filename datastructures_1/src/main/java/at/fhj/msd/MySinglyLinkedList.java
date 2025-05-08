@@ -1,6 +1,8 @@
 package at.fhj.msd;
 
 public class MySinglyLinkedList<E> {
+  private Node<E> head;
+  private int size = 0;
 
   private static class Node<E> {
     E data;
@@ -9,12 +11,8 @@ public class MySinglyLinkedList<E> {
     public Node(E data, Node<E> next) {
       this.data = data;
       this.next = next;
-
     }
   }
-
-  private Node<E> head;
-  private int size = 0;
 
   public MySinglyLinkedList() {
     head = null;

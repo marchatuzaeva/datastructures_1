@@ -2,6 +2,8 @@ package at.fhj.msd;
 
 public class App {
     public static void main(String[] args) {
-        System.out.println("Hello World");
+        String expression = "+ 3 4"; // Beispiel: ergibt 7
+        double result = MyCalculator.evaluate(expression);
+        System.out.println("Ergebnis: " + result);
     }
 }
