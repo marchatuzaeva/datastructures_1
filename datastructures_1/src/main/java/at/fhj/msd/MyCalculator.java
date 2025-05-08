@@ -20,7 +20,7 @@ public class MyCalculator {
                     num.append(expression.charAt(i));
                     i++;
                 }
-                i--;  // Um sicherzustellen, dass die Schleife den richtigen Index beibehält
+                i--; // Um sicherzustellen, dass die Schleife den richtigen Index beibehält
                 stack.addFirst(Integer.parseInt(num.toString()));
             }
             // Wenn der Operator ist, führe die Operation aus
@@ -51,8 +51,4 @@ public class MyCalculator {
         return stack.removeFirst();
     }
 
-    public static void main(String[] args) {
-        String expression = "3 4 + 2 * 7 /";
-        System.out.println("Ergebnis: " + evaluatePostfix(expression));  // Sollte 2 ausgeben
-    }
 }
