@@ -2,7 +2,7 @@ package at.fhj.msd;
 
 public class MySinglyLinkedList<E> {
   private Node<E> head;
-  private int size = 0;
+  private int size;
 
   private static class Node<E> {
     E data;
@@ -24,34 +24,25 @@ public class MySinglyLinkedList<E> {
   }
 
   public boolean isEmpty() {
-    if (size == 0) {
-      return true;
-    } else {
-      return false;
-    }
+    return size == 0;
   }
 
   public E first() {
-    if (isEmpty()) {
+    if (isEmpty())
       return null;
-    }
     return head.data;
   }
 
   public void addFirst(E element) {
-    if (element == null) {
+    if (element == null)
       throw new IllegalArgumentException("Element cannot be null");
-    }
-
-    Node<E> newNode = new Node<>(element, head);
-    head = newNode;
+    head = new Node<>(element, head);
     size++;
   }
 
   public E removeFirst() {
     if (isEmpty())
       return null;
-
     E temp = head.data;
     head = head.next;
     size--;

@@ -3,112 +3,89 @@ package at.fhj.msd;
 public class MyLinkedList<E> {
     private Node<E> head;
     private Node<E> tail;
-    private int size = 0;
+    private int size;
 
     private static class Node<E> {
         E data;
         Node<E> next;
         Node<E> prev;
 
-        public Node(E data, Node<E> next, Node<E> prev) {
+        Node(E data) {
             this.data = data;
-            this.next = next;
-            this.prev = prev;
         }
     }
 
-   
+    public MyLinkedList() {
+        head = null;
+        tail = null;
+        size = 0;
+    }
 
     public int size() {
         return size;
     }
 
     public boolean isEmpty() {
-
         return size == 0;
     }
 
     public E first() {
-        if (isEmpty()) {
-            return null;
-        }
+        if (isEmpty()) return null;
         return head.data;
     }
 
     public E last() {
-        if (isEmpty()) {
-            return null;
-        }
+        if (isEmpty()) return null;
         return tail.data;
     }
 
-    public void addFirst(E element) {
-        if (element == null) {
-            throw new IllegalArgumentException("Element cannot be null");
-        }
-
-        Node<E> newNode = new Node<>(element, head, null);
-
+    public void addFirst(E e) {
+        Node<E> newNode = new Node<>(e);
         if (isEmpty()) {
-            tail = newNode;
+            head = tail = newNode;
         } else {
+            newNode.next = head;
             head.prev = newNode;
+            head = newNode;
         }
-
-        head = newNode;
         size++;
     }
 
-    public void addLast(E element) {
-        if (element == null) {
-            throw new IllegalArgumentException("Element cannot be null");
-        }
-
-        Node<E> newNode = new Node<>(element, null, tail);
-
+    public void addLast(E e) {
+        Node<E> newNode = new Node<>(e);
         if (isEmpty()) {
-            head = newNode;
+            head = tail = newNode;
         } else {
             tail.next = newNode;
+            newNode.prev = tail;
+            tail = newNode;
         }
-
-        tail = newNode;
         size++;
     }
 
     public E removeFirst() {
-        if (isEmpty()) {
-            return null;
-        }
-
-        E element = head.data;
-
-        head = head.next;
-        if (head != null) {
+        if (isEmpty()) return null;
+        E data = head.data;
+        if (head.next != null) {
+            head = head.next;
             head.prev = null;
         } else {
-            tail = null;
+            head = tail = null;
         }
-
         size--;
-        return element;
+        return data;
     }
 
     public E removeLast() {
-        if (isEmpty()) {
-            return null;
-        }
-
-        E element = tail.data;
-        tail = tail.prev;
-
-        if (tail != null) {
+        if (isEmpty()) return null;
+        E data = tail.data;
+        if (tail.prev != null) {
+            tail = tail.prev;
             tail.next = null;
         } else {
-            head = null;
+            head = tail = null;
         }
-
         size--;
-        return element;
+        return data;
     }
 }
