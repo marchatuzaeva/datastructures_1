@@ -2,59 +2,47 @@ package at.fhj.msd;
 
 public class MySinglyLinkedList<E> {
   private Node<E> head;
-  private int size = 0;
+  private int size;
 
   private static class Node<E> {
-    E data;
-    Node<E> next;
+      E data;
+      Node<E> next;
 
-    public Node(E data, Node<E> next) {
-      this.data = data;
-      this.next = next;
-    }
+      Node(E data) {
+          this.data = data;
+      }
   }
 
   public MySinglyLinkedList() {
-    head = null;
-    size = 0;
+      head = null;
+      size = 0;
   }
 
   public int size() {
-    return size;
+      return size;
   }
 
   public boolean isEmpty() {
-    if (size == 0) {
-      return true;
-    } else {
-      return false;
-    }
+      return size == 0;
   }
 
   public E first() {
-    if (isEmpty()) {
-      return null;
-    }
-    return head.data;
+      if (isEmpty()) return null;
+      return head.data;
   }
 
-  public void addFirst(E element) {
-    if (element == null) {
-      throw new IllegalArgumentException("Element cannot be null");
-    }
-
-    Node<E> newNode = new Node<>(element, head);
-    head = newNode;
-    size++;
+  public void addFirst(E e) {
+      Node<E> newNode = new Node<>(e);
+      newNode.next = head;
+      head = newNode;
+      size++;
   }
 
   public E removeFirst() {
-    if (isEmpty())
-      return null;
-
-    E temp = head.data;
-    head = head.next;
-    size--;
-    return temp;
+      if (isEmpty()) return null;
+      E data = head.data;
+      head = head.next;
+      size--;
+      return data;
   }
 }

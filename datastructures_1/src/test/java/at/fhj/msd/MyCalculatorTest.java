@@ -10,33 +10,33 @@ class MyCalculatorTest {
 
     @Test
     void testEvaluateSimpleAddition() {
-        assertEquals(5.0, calculator.evaluate("2 3 +"));
+        assertEquals(5.0, calculator.compute("2 3 +"));
     }
 
     @Test
     void testEvaluateSimpleSubtraction() {
-        assertEquals(1.0, calculator.evaluate("5 4 -"));
+        assertEquals(1.0, calculator.compute("5 4 -"));
     }
 
     @Test
     void testEvaluateSimpleMultiplication() {
-        assertEquals(12.0, calculator.evaluate("3 4 *"));
+        assertEquals(12.0, calculator.compute("3 4 *"));
     }
 
     @Test
     void testEvaluateSimpleDivision() {
-        assertEquals(4.0, calculator.evaluate("8 2 /"));
+        assertEquals(4.0, calculator.compute("8 2 /"));
     }
 
     @Test
     void testEvaluateMultipleOperations() {
-        assertEquals(14.0, calculator.evaluate("3 4 + 2 *"));
+        assertEquals(14.0, calculator.compute("3 4 + 2 *"));
     }
 
     @Test
     void testEvaluateWithDivisionByZero() {
         try {
-            calculator.evaluate("2 0 /");
+            calculator.compute("2 0 /");
             fail("Expected ArithmeticException not thrown");
         } catch (ArithmeticException e) {
             // Expected exception
@@ -46,7 +46,7 @@ class MyCalculatorTest {
     @Test
     void testEvaluateEmptyExpression() {
         try {
-            calculator.evaluate("");
+            calculator.compute("");
             fail("Expected IllegalArgumentException not thrown");
         } catch (IllegalArgumentException e) {
             // Expected exception
@@ -56,7 +56,7 @@ class MyCalculatorTest {
     @Test
     void testEvaluateNullExpression() {
         try {
-            calculator.evaluate(null);
+            calculator.compute(null);
             fail("Expected IllegalArgumentException not thrown");
         } catch (IllegalArgumentException e) {
             // Expected exception
@@ -66,7 +66,7 @@ class MyCalculatorTest {
     @Test
     void testEvaluateWithInvalidToken() {
         try {
-            calculator.evaluate("3 4 @");
+            calculator.compute("3 4 @");
             fail("Expected IllegalArgumentException not thrown");
         } catch (IllegalArgumentException e) {
             // Expected exception
