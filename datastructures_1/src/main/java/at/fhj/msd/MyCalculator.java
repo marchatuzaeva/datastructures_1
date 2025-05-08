@@ -1,32 +1,41 @@
 package at.fhj.msd;
 
+import java.util.Stack;
+
 public class MyCalculator {
 
-    public static double evaluate(String expr) {
-        String[] tokens = expr.trim().split(" ");
-        MySinglyLinkedList<String> stack = new MySinglyLinkedList<>();
+  public static int evaluate(String expression) {
+    Stack<Integer> stack = new Stack<>();
 
-        // Von rechts nach links durchgehen
-        for (int i = tokens.length - 1; i >= 0; i--) {
-            String token = tokens[i];
-
-            if (token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/")) {
-                double a = Double.parseDouble(stack.removeFirst());
-                double b = Double.parseDouble(stack.removeFirst());
-
-                double result = 0;
-                if (token.equals("+")) result = a + b;
-                if (token.equals("-")) result = a - b;
-                if (token.equals("*")) result = a * b;
-                if (token.equals("/")) result = a / b;
-
-                stack.addFirst(String.valueOf(result));
-            } else {
-                // Zahl -> auf den Stack legen
-                stack.addFirst(token);
-            }
-        }
-
-        return Double.parseDouble(stack.removeFirst());
+    for (String token : expression.split(" ")) {
+      switch (token) {
+        case "+":
+          stack.push(stack.pop() + stack.pop());
+          break;
+        case "-":
+          int b = stack.pop();
+          int a = stack.pop();
+          stack.push(a - b);
+          break;
+        case "*":
+          stack.push(stack.pop() * stack.pop());
+          break;
+        case "/":
+          int divisor = stack.pop();
+          int dividend = stack.pop();
+          stack.push(dividend / divisor);
+          break;
+        default:
+          stack.push(Integer.parseInt(token));
+      }
     }
+
+    return stack.pop();
+  }
+
+  public static void main(String[] args) {
+    String expression = "5 1 2 + 4 * + 3 -";  
+    int result = evaluate(expression);
+    System.out.println("Result: " + result);
+  }
 }
